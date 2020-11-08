@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--    注册 bean-->
+    <bean id="userService" class="com.yifan.service.UserServiceImpl"/>
+<!--    <bean id="log" class="com.yifan.log.Log"/>-->
+<!--    <bean id="afterLog" class="com.yifan.log.AfterLog"/>-->
+
+<!--    方式一：使用原生 Spring API 接口-->
+<!--    配置 aop：需要导入 aop 的约束-->
+    <!--    <aop:config>-->
+    <!--&lt;!&ndash;        切入点: expression 表达式，execution（要执行的位置：public 返回值 类名 方法名 参数）(..) 两个点表示可以是任意参数，*代表全部包含&ndash;&gt;-->
+    <!--&lt;!&ndash;        在这里配置了一个执行位置&ndash;&gt;-->
+    <!--        <aop:pointcut id="pointcut" expression="execution(* com.yifan.service.UserServiceImpl.*(..))"/>-->
+
+    <!--&lt;!&ndash;        执行环绕增加&ndash;&gt;-->
+    <!--&lt;!&ndash;        代表的意思是：将 log 这个类切入到上面的 pointcut 方法里面&ndash;&gt;-->
+    <!--        <aop:advisor advice-ref="log" pointcut-ref="pointcut"/>-->
+    <!--        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>-->
+    <!--    </aop:config>-->
+
+<!--    方式二：自定义类-->
+    <bean id="diy" class="com.yifan.diy.DiyPointCut"/>
+    <aop:config>
+<!--        自定义切面，ref 之后跟我们要引用的类-->
+        <aop:aspect ref="diy">
+<!--            切入点-->
+            <aop:pointcut id="point" expression="execution(* com.yifan.service.UserServiceImpl.*(..))"/>
+<!--            通知-->
+            <aop:before method="before" pointcut-ref="point"/>
+            <aop:after method="after" pointcut-ref="point"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
