@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    无参构造 -->
+<!--    <bean id="user" class="com.yifan.pojo.User">-->
+        <!--        <property name="name" value="yifan"/>-->
+<!--    </bean>-->
+
+<!--    有参构造第一种：下标赋值-->
+<!--    <bean id="user" class="com.yifan.pojo.User">-->
+<!--        <constructor-arg index="0" value="yifan1"/>-->
+<!--    </bean>-->
+
+<!--    有参构造第二种：通过类型创建。不建议使用-->
+<!--    <bean id="user" class="com.yifan.pojo.User">-->
+<!--        <constructor-arg type="java.lang.String" value="yifan2"/>-->
+<!--    </bean>-->
+
+<!--    第三种：使用参数名来创建-->
+    <bean id="user" class="com.yifan.pojo.User">
+        <constructor-arg name="name" value="yifan3"/>
+    </bean>
+
+    <bean id="user2" class="com.yifan.pojo.User2">
+
+    </bean>
+
+<!--    别名，如果添加了别名，我们就可以使用别名来获取到对象-->
+    <alias name="user" alias="test"/>
+
+    <!--
+    id: bean 的唯一标识符，也就是岘港与我们的对象名字
+    class: bean 对象所对应的全限定名，包名 + 类型
+    name: 也是别名，和 alias 的功能一样，而且name 更高级，因为可以同时取多个别名;可以用空格、逗号、分号来分割
+    -->
+    <bean id="user" class="com.yifan.pojo.User2" name="u2, user3">
+
+    </bean>
+
+</beans>
