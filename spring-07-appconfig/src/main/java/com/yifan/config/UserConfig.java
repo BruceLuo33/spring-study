@@ -24,6 +24,7 @@ public class UserConfig {
     // 这个方法的名字就相当于 bean 标签中的 id 属性
     // 这个方法的返回值就相当于 bean 标签中的 class 属性
     // @Bean 相当于向 IoC 注入当前信息
+    // this is a test
     @Bean
     public User testUser() {
         return new User(); // 就是返回要注入到 bean 的对象
